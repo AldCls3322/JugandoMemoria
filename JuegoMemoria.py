@@ -57,7 +57,6 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
         "Se da un color de valor absoluto"
         valcolor = tiles[mark] * 0.125
         r = 0
