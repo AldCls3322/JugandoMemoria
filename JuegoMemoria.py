@@ -57,8 +57,32 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
+        goto(x + 2, y)
+        "Se da un color de valor absoluto"
+        valcolor = tiles[mark] * 0.125
+        r = 0
+        g = 0
+        b = 0
+        "Segun ese valor se asignan valores de rgb por medio de modulos como en paint con base al arcoiris"
+        if(valcolor<=1):
+            r = 1
+            g = valcolor % 1
+            b = 0
+        elif(valcolor<=2):
+            r = 1 - valcolor % 1
+            g = 1
+            b = 0
+        elif(valcolor<=3):
+            r = 0
+            g = 1
+            b = valcolor % 1
+        else:
+            r = 0
+            g = 1 - valcolor % 1
+            b = 1
+
         goto(x+25, y+10)
-        color('black')
+        color(r,g,b)
         write(tiles[mark], align='center', font=('Arial', 15, 'bold'))
 
     update()
