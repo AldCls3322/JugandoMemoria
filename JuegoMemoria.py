@@ -34,6 +34,7 @@ def tap(x, y):
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        
     else:
         hide[spot] = False
         hide[mark] = False
@@ -79,8 +80,10 @@ def draw():
             r = 0
             g = 1 - valcolor % 1
             b = 1
+
+        goto(x+25, y+10)
         color(r,g,b)
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align='center', font=('Arial', 15, 'bold'))
 
     update()
     ontimer(draw, 100)
