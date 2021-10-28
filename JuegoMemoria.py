@@ -7,6 +7,8 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 numTaps = 0
+cartasDescubiertas = 0
+fin = False
 
 def square(x, y):
     "Draw white square with black outline at (x, y)."
@@ -33,17 +35,26 @@ def tap(x, y):
     spot = index(x, y)
     mark = state['mark']
     global numTaps 
+    global cartasDescubiertas
+    global fin
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
         
     else:
-        hide[spot] = False
+        hide[spot] = False  
         hide[mark] = False
         state['mark'] = None
+        cartasDescubiertas += 1
     
     numTaps += 1
     print("Veces que se ha hecho click: ", numTaps)
+    print("Pares de cartas encontradas: ", cartasDescubiertas)
+    print("")
+
+    if (cartasDescubiertas == 32):
+        print("HAS GANADO!!")
+        fin = True
 
 def draw():
     "Draw image and tiles."
@@ -88,6 +99,9 @@ def draw():
         goto(x+25, y+10)
         color(r,g,b)
         write(tiles[mark], align='center', font=('Arial', 15, 'bold'))
+    
+    if (fin):
+        return
 
     update()
     ontimer(draw, 100)
