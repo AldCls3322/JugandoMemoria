@@ -34,6 +34,7 @@ def tap(x, y):
     "Update mark and hidden tiles based on tap."
     spot = index(x, y)
     mark = state['mark']
+    "Se utilizan las variables globales"
     global numTaps 
     global cartasDescubiertas
     global fin
@@ -45,13 +46,14 @@ def tap(x, y):
         hide[spot] = False  
         hide[mark] = False
         state['mark'] = None
-        cartasDescubiertas += 1
+        cartasDescubiertas += 1 #Se aumenta el numero de cartas descubiertas
     
+    "Aumenta el numero de clic"
     numTaps += 1
     print("Veces que se ha hecho click: ", numTaps)
     print("Pares de cartas encontradas: ", cartasDescubiertas)
     print("")
-
+    "Si todas las cartas han sido descubiertas se imprime un mensaje en consola y la variable fin se marca True"
     if (cartasDescubiertas == 32):
         print("HAS GANADO!!")
         fin = True
@@ -78,28 +80,32 @@ def draw():
         r = 0
         g = 0
         b = 0
-        "Segun ese valor se asignan valores de rgb por medio de modulos como en paint con base al arcoiris"
+        "Segun los 4 tipo de transicion se cambian los colores RGB"
+        #Rojo -> Amarillo
         if(valcolor<=1):
             r = 1
             g = valcolor % 1
             b = 0
+        #Amarillo -> Verde
         elif(valcolor<=2):
             r = 1 - valcolor % 1
             g = 1
             b = 0
+        #Verde -> Verde/Azul
         elif(valcolor<=3):
             r = 0
             g = 1
             b = valcolor % 1
+        #Verde/Azul -> Azul
         else:
             r = 0
             g = 1 - valcolor % 1
             b = 1
-
-        goto(x+25, y+10)
-        color(r,g,b)
+        goto(x+25, y+10)    #Centrado del texto
+        color(r,g,b)    #Se aplica RGB
         write(tiles[mark], align='center', font=('Arial', 15, 'bold'))
     
+    "Si 'fin' es verdadero el juego finaliza"
     if (fin):
         return
 
